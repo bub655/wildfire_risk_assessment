@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wildfire_risk_assessment/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,7 +52,7 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage> createState() => main();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
