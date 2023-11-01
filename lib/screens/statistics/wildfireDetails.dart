@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wildfire_risk_assessment/screens/home.dart';
+import 'package:wildfire_risk_assessment/screens/statistics/statistics.dart';
 
 
 class WildfireStatistic extends StatefulWidget {
@@ -81,19 +83,27 @@ class _WildfireStatisticState extends State<WildfireStatistic> {
               width: MediaQuery.of(context).size.width,
               child: Padding(
                 padding: EdgeInsets.only(top: 44.0, bottom: 12.0),
-                child: Column(
-                  children: [
-                    
-                    Text(
+                child: Row(children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                    },
+                    child: Icon(Icons.arrow_back_ios_new, color: Colors.white),
+                    style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(10),
+                      backgroundColor: const Color(0x80626262),
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Text(
                       wildfireName,
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w800,
                       )
-                    ),
-
-                  ]
-                ),
+                  ),
+                ]),
               ),
               color: Color(0xffd9d9d9)
           ),

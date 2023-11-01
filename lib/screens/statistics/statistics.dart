@@ -23,7 +23,6 @@ class _StatsPageState extends State<StatsPage> {
 // Fetch content from the json file
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/converted.json');
-    print(response);
     final data = await json.decode(response);
     setState(() {
       _items = data["features"];
