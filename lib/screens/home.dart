@@ -12,12 +12,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _index = 1;
+  int _index = 2;
 
   static List<Widget> _content = <Widget>[
     PreparationPage(),
     PresentPage(),
-    Text("bye bye"),
     StatsPage(),
   ];
 

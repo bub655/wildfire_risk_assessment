@@ -32,7 +32,7 @@ class _PresentPageState extends State<PresentPage> {
               Container(
                   width: MediaQuery.of(context).size.width,
                   child: Padding(
-                    padding: EdgeInsets.only(top: 44.0),
+                    padding: EdgeInsets.only(top: 44.0, bottom: 12.0),
                     child: Center(
                       child: Text(
                           "Wildfire Danger Check",
