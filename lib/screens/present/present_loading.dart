@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:wildfire_risk_assessment/screens/present/present_results.dart';
 
 class DangerLoadingScreen extends StatefulWidget {
   final String country;
@@ -29,10 +30,8 @@ class _DangerLoadingScreenState extends State<DangerLoadingScreen> {
   double _latitude = 0;
   double _longitude = 0;
   int _range = 50;
-  String _key = dotenv.get('TRIAL', fallback:"");
 
   _DangerLoadingScreenState(country, latitude, longitude, range) {
-    print(latitude);
     this._country = country;
     this._latitude = latitude;
     this._longitude = longitude;
@@ -41,9 +40,9 @@ class _DangerLoadingScreenState extends State<DangerLoadingScreen> {
 
   void initState() {
     super.initState();
-    getFireData(_latitude, _longitude);
+    getFireData(_latitude, _longitude, _range);
   }
-  Future<void> getFireData(latitude, longitude) async {
+  Future<void> getFireData(latitude, longitude, range) async {
     final uri_smhi = Uri.parse("https://opendata-download-metanalys.smhi.se/api/category/fwia1g/version/1/daily/geotype/point/lon/${longitude}/lat/${latitude}/data.json");
     final response_smhi = await http.get(uri_smhi);
 
@@ -94,32 +93,43 @@ class _DangerLoadingScreenState extends State<DangerLoadingScreen> {
     double wind = weather_json['wind']['speed']*3.6;
     //double rain = weather_json['hourly']['rain'];
 
+    var model_response = await runModel(ffmc, dmc, dc, isi, temp, humidity, wind);
+    print(model_response);
+    var prediction = model_response['predictions'];
+    print(prediction);
+    var factor = model_response['factor'];
 
-    print("API VALUES");
-    print(humidity.toString());
-    // print(rain.toString());
-    print(wind.toString());
-    print(temp);
-
-
-
+    route(latitude, longitude, prediction, factor, humidity, temp, wind, range);
   }
 
+  Future runModel(ffmc, dmc, dc, isi, temp, rh, wind) async {
+    final uri_model = Uri.parse("${dotenv.env['PRESENT_MODEL']}?FFMC=${ffmc}&DMC=${dmc}&DC=${dc}&ISI=${isi}&temp=${temp}&RH=${rh}&wind=${wind}");
+    final response = await http.get(uri_model);
+    print("CALLED RESPONSE");
+    var predictions;
+    if(response.statusCode == 200) {
+      predictions = json.decode(response.body);
+    } else {
+      print("Model failed");
+    }
+    return predictions;
+  }
+
+  route(latitude, longitude, area, factor, humidity, temp, wind, range) {
+    Navigator.pushReplacement(context, MaterialPageRoute(
+        builder: (context) => PresentResultsPage(latitude: latitude, longitude: longitude, factor: factor, area: area, humidity: humidity, temp: temp, wind: wind, range: range)
+    )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(dotenv.get('TRIAL', fallback:""));
     return Scaffold(
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircularProgressIndicator(),
-              SizedBox(height: 20),
-              Text("Loading...", style: TextStyle(fontSize: 18)),
-              Text(_country),
-              Text(_latitude.toString()),
-
             ],
           ),
         )

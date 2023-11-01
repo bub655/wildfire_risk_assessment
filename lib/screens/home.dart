@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wildfire_risk_assessment/screens/preparation.dart';
 import 'package:wildfire_risk_assessment/screens/present/present.dart';
-import 'package:wildfire_risk_assessment/screens/statistics.dart';
+import 'package:wildfire_risk_assessment/screens/statistics/statistics.dart';
 import 'package:wildfire_risk_assessment/presentation/wildfire_app_icons.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -45,11 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(CustomIcons.fire),
             label: 'Wildfire Risk',
-            backgroundColor: Color(0xffd9d9d9)
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CustomIcons.house_damage),
-            label: 'Past Damage',
             backgroundColor: Color(0xffd9d9d9)
           ),
           BottomNavigationBarItem(
