@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wildfire_risk_assessment/screens/preparation.dart';
+import 'package:wildfire_risk_assessment/screens/present/present.dart';
 import 'package:wildfire_risk_assessment/screens/statistics.dart';
 import 'package:wildfire_risk_assessment/presentation/wildfire_app_icons.dart';
 
@@ -11,11 +12,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _index = 0;
+  int _index = 1;
 
   static List<Widget> _content = <Widget>[
     PreparationPage(),
-    PreparationPage(),
+    PresentPage(),
     Text("bye bye"),
     StatsPage(),
   ];
@@ -44,14 +45,17 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(CustomIcons.fire),
             label: 'Wildfire Risk',
+            backgroundColor: Color(0xffd9d9d9)
           ),
           BottomNavigationBarItem(
             icon: Icon(CustomIcons.house_damage),
             label: 'Past Damage',
+            backgroundColor: Color(0xffd9d9d9)
           ),
           BottomNavigationBarItem(
             icon: Icon(CustomIcons.chart_bar),
             label: 'Statistics',
+            backgroundColor: Color(0xffd9d9d9)
           ),
         ],
         currentIndex: _index,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wildfire_risk_assessment/screens/home.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main()async {
+  await dotenv.load(fileName: 'assets/.env');
   runApp(const MyApp());
 }
 
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
 
       title: 'Flutter Demo',
       theme: ThemeData(
-        useMaterial3: true,
+        useMaterial3: false,
       ),
       home: HomeScreen(),
     );
