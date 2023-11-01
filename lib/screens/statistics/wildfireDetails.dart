@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wildfire_risk_assessment/screens/home.dart';
 import 'package:wildfire_risk_assessment/screens/statistics/statistics.dart';
 
-
 class WildfireStatistic extends StatefulWidget {
   final String wildfireName;
   final String acresBurned;
@@ -42,6 +41,7 @@ class WildfireStatistic extends StatefulWidget {
 }
 
 class _WildfireStatisticState extends State<WildfireStatistic> {
+
   String wildfireName = "";
   String acresBurned = "N/A";
   String counties = "N/A";
@@ -72,8 +72,8 @@ class _WildfireStatisticState extends State<WildfireStatistic> {
     this.searchDescription = searchDescription;
     this.latitude = latitude;
     this.longitude = longitude;
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,6 +150,22 @@ class _WildfireStatisticState extends State<WildfireStatistic> {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 0),
+            child: Container(
+              height: 320,
+              width: 320,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(32.0),
+                child: Image.asset(
+                    'assets/images/Statistics.png',
+                ),
+              )
+
+
+
+            ),
+          )
         ],
       ),
     );
